@@ -1,0 +1,107 @@
+{
+  "identifier" : "8F2A1C34-0000-4000-9000-YDSMASTERKIT1",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "tr_TR",
+    "_storefront" : "TUR",
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21600001",
+      "localizations" : [
+
+      ],
+      "name" : "Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "249.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6473000001",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Tüm kelimeler, 12 ay boyunca",
+              "displayName" : "Yıllık Premium",
+              "locale" : "tr_TR"
+            }
+          ],
+          "productID" : "com.tugrulfirat.ydsmaster.premium.yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Premium Yearly",
+          "subscriptionGroupID" : "21600001",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "149.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6473000002",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Tüm kelimeler, 6 ay boyunca",
+              "displayName" : "6 Aylık Premium",
+              "locale" : "tr_TR"
+            }
+          ],
+          "productID" : "com.tugrulfirat.ydsmaster.premium.sixmonths",
+          "recurringSubscriptionPeriod" : "P6M",
+          "referenceName" : "Premium Six Months",
+          "subscriptionGroupID" : "21600001",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "6473000003",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Tüm kelimeler, aylık",
+              "displayName" : "Aylık Premium",
+              "locale" : "tr_TR"
+            }
+          ],
+          "productID" : "com.tugrulfirat.ydsmaster.premium.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium Monthly",
+          "subscriptionGroupID" : "21600001",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
