@@ -23,10 +23,15 @@ struct GameHostView: View {
         // Word Circuit drives its own session/engine (multi-word-per-wave
         // scoring doesn't fit the shared "one word per question" GameSession
         // contract) — hand off to its dedicated host entirely.
-        if mode == .wordInvaders {
-            WordInvadersHostView(kind: kind)
-        } else {
-            sessionBasedBody
+        Group {
+            if mode == .wordInvaders {
+                WordInvadersHostView(kind: kind)
+            } else {
+                sessionBasedBody
+            }
+        }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            GameAudioControls()
         }
     }
 
@@ -164,5 +169,67 @@ struct GameHostView: View {
         withAnimation(.spring(response: 0.5, dampingFraction: 0.9)) {
             phase = .intro
         }
+    }
+}
+
+/// Shared in-game audio controls. Keeping this at the host level gives every
+/// game the same persisted music and sound-effect settings without covering
+/// game-specific HUDs or interaction areas.
+private struct GameAudioControls: View {
+    @EnvironmentObject private var store: WordStore
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Spacer()
+            audioButton(
+                symbol: "music.note",
+                enabled: store.profile.musicEnabled,
+                label: store.profile.musicEnabled ? "Müziği kapat" : "Müziği aç",
+                action: store.toggleMusic
+            )
+            audioButton(
+                symbol: "speaker.wave.2.fill",
+                enabled: store.profile.soundEnabled,
+                label: store.profile.soundEnabled ? "Ses efektlerini kapat" : "Ses efektlerini aç",
+                action: store.toggleSound
+            )
+        }
+        .padding(.horizontal, 14)
+        .frame(height: 46)
+        .background(Theme.background)
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(Theme.cardBorder)
+                .frame(height: 1)
+        }
+    }
+
+    private func audioButton(
+        symbol: String,
+        enabled: Bool,
+        label: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            Haptics.selection()
+            action()
+        } label: {
+            Image(systemName: symbol)
+                .font(.system(size: 15, weight: .bold))
+                .foregroundStyle(enabled ? Theme.accent : Theme.textSecondary.opacity(0.45))
+                .frame(width: 36, height: 36)
+                .background(Circle().fill(Theme.card))
+                .overlay {
+                    if !enabled {
+                        Rectangle()
+                            .fill(Theme.textSecondary.opacity(0.65))
+                            .frame(width: 2, height: 22)
+                            .rotationEffect(.degrees(45))
+                    }
+                }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+        .accessibilityValue(enabled ? "Açık" : "Kapalı")
     }
 }

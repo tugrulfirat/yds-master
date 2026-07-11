@@ -85,6 +85,9 @@ struct UserProfile: Codable, Hashable {
     var lastPlayedDay: Date?
 
     var hints: HintInventory = HintInventory()
+    /// Last calendar day hints were topped back up to their daily minimums.
+    /// Optional so profiles saved before this existed still decode.
+    var lastHintRefillDay: Date?
     var earnedBadgeIDs: Set<String> = []
     var dailyMission: DailyMissionState = DailyMissionState()
     var bestCombo: Int = 0

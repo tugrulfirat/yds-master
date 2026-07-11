@@ -7,7 +7,7 @@ YDS Master: Kelime Oyunları
 Oyunla YDS kelimesi öğren
 
 ## Tanıtım Metni (170 karakter)
-YDS kelimelerini ezberleme, oyna! 6 arcade oyun moduyla geçmiş sınavlardan derlenen kelimeleri kalıcı öğren. İlk 150 kelime ücretsiz.
+YDS kelimelerini ezberleme, oyna! 6 arcade oyun moduyla geçmiş sınavlardan derlenen kelimeleri kalıcı öğren. İlk 500 kelime ücretsiz.
 
 ## Açıklama
 YDS Master, YDS/YÖKDİL/e-YDS'ye hazırlananlar için tasarlanmış bir kelime
@@ -34,7 +34,7 @@ TAMAMEN TÜRKÇE, TAMAMEN ÇEVRİMDIŞI
 • Hesap veya kayıt yok
 
 ÜCRETSİZ BAŞLA
-Sınavda en çok çıkan 150 kelime tamamen ücretsiz. Kelime hazinesinin
+Sınavda en çok çıkan 500 kelime tamamen ücretsiz. Kelime hazinesinin
 tamamına erişmek için Premium'a geç:
 • Aylık, 6 aylık veya yıllık abonelik seçenekleri
 • Tanışma dönemine özel fiyatlar
@@ -71,6 +71,6 @@ Notlar:
 - Her ürün için Türkçe görünen ad + açıklama girilmeli (yukarıdaki adlar).
 
 ## İnceleme Notları (App Review Notes alanına)
-Uygulama tamamen çevrimdışıdır, hesap gerektirmez. İlk 150 kelime
+Uygulama tamamen çevrimdışıdır, hesap gerektirmez. İlk 500 kelime
 ücretsizdir; abonelik yalnızca kelime veritabanının tamamını açar.
 Test için: ana ekrandaki "Premium'a Geç" düğmesi paywall'u açar.

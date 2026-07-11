@@ -1,7 +1,7 @@
 import Foundation
 
 func runFreeTierTests(store: WordStore) {
-    print("— Free tier gating (150 words)")
+    print("— Free tier gating (\(WordStore.freeWordCount) words)")
     store.isPremium = false
     expect(store.playableWords.count == WordStore.freeWordCount, "free tier is exactly \(WordStore.freeWordCount) words (got \(store.playableWords.count))")
     let freeSet = Set(store.playableWords.map(\.id))

@@ -12,14 +12,14 @@ final class WordStore: ObservableObject {
     // MARK: Free tier
 
     /// The highest-frequency words playable without a subscription.
-    static let freeWordCount = 150
+    static let freeWordCount = 500
 
     /// Mirrored from `PremiumStore.isPremium` by the app root.
     @Published var isPremium = false
 
     /// Words available for gameplay under the current entitlement — `words`
-    /// is sorted by frequency rank, so the free tier is exactly the 150
-    /// most exam-critical words.
+    /// is sorted by frequency rank, so the free tier is exactly the
+    /// `freeWordCount` most exam-critical words.
     var playableWords: [Word] {
         isPremium ? words : Array(words.prefix(Self.freeWordCount))
     }
@@ -281,6 +281,26 @@ final class WordStore: ObservableObject {
         if profile.dailyMission.day != today {
             profile.dailyMission = DailyMissionState(day: today)
         }
+        refillHintsIfNeeded()
+    }
+
+    /// Tops power-ups back up to their daily baseline once per calendar day.
+    /// Previously hints were a one-time pool that, once spent, never
+    /// returned — this restores them each day so a bad round doesn't
+    /// permanently strand the player without hints.
+    private func refillHintsIfNeeded() {
+        let today = calendar.startOfDay(for: Date())
+        if let last = profile.lastHintRefillDay, calendar.isDate(last, inSameDayAs: today) {
+            return
+        }
+        let baseline = HintInventory()
+        profile.hints.firstLetter = max(profile.hints.firstLetter, baseline.firstLetter)
+        profile.hints.removeWrong = max(profile.hints.removeWrong, baseline.removeWrong)
+        profile.hints.slowMotion = max(profile.hints.slowMotion, baseline.slowMotion)
+        profile.hints.magnet = max(profile.hints.magnet, baseline.magnet)
+        profile.hints.shield = max(profile.hints.shield, baseline.shield)
+        profile.lastHintRefillDay = today
+        saveProfile()
     }
 
     func saveProfile() {

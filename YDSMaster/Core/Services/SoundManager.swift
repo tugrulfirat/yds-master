@@ -52,18 +52,33 @@ final class SoundManager {
     private var musicPlayer: AVAudioPlayer?
     #endif
     private var currentTrack: MusicTrack?
-    private var sessionConfigured = false
+    private var sessionCategoryConfigured = false
 
     private init() {}
 
-    /// `.ambient` respects the ringer/silent switch and mixes with the
-    /// user's own music — the right behavior for a study game.
-    private func configureSessionIfNeeded() {
-        guard !sessionConfigured else { return }
-        sessionConfigured = true
+    /// App audio follows its own in-app toggles rather than the hardware
+    /// silent switch. Reactivate on every playback request because calls and
+    /// other interruptions can deactivate an already configured session.
+    private func activateSession() {
         #if canImport(AVFoundation) && os(iOS)
-        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: [.mixWithOthers])
-        try? AVAudioSession.sharedInstance().setActive(true)
+        let session = AVAudioSession.sharedInstance()
+        if !sessionCategoryConfigured {
+            do {
+                try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+                sessionCategoryConfigured = true
+            } catch {
+                #if DEBUG
+                print("SoundManager: failed to configure audio session: \(error)")
+                #endif
+            }
+        }
+        do {
+            try session.setActive(true)
+        } catch {
+            #if DEBUG
+            print("SoundManager: failed to activate audio session: \(error)")
+            #endif
+        }
         #endif
     }
 
@@ -81,7 +96,7 @@ final class SoundManager {
     func play(_ effect: SoundEffect) {
         guard isSoundEnabled else { return }
         #if canImport(AVFoundation)
-        configureSessionIfNeeded()
+        activateSession()
         if let player = players[effect] {
             player.currentTime = 0
             player.play()
@@ -105,7 +120,7 @@ final class SoundManager {
         currentTrack = track
         guard isMusicEnabled else { return }
         #if canImport(AVFoundation)
-        configureSessionIfNeeded()
+        activateSession()
         if !switching, let player = musicPlayer {
             if !player.isPlaying { player.play() }
             return

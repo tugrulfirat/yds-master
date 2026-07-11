@@ -39,7 +39,7 @@
 ## Kodda hazır olanlar
 
 - [x] StoreKit 2 abonelik altyapısı (PremiumStore.swift)
-- [x] 150 ücretsiz kelime / gerisi kilitli (WordStore.playableWords)
+- [x] 500 ücretsiz kelime / gerisi kilitli (WordStore.playableWords)
 - [x] Türkçe paywall: 3 plan, geri yükleme, yasal linkler (PaywallView.swift)
 - [x] Kelime Bankası'nda kilitli kelime görünümü (bulanık anlam + kilit)
 - [x] Ana ekranda "Premium'a Geç" girişi

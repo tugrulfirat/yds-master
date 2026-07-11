@@ -53,6 +53,7 @@ if let firstWord = store.words.first(where: { store.progress(for: $0).timesSeen 
 runBringToFrontTests(store: store)
 runFreeTierTests(store: store)
 runExampleSentenceQualityTests(words: store.words)
+runHintRefillTests(store: store)
 runDistractorFairnessTests()
 
 try? FileManager.default.removeItem(at: tempDir)
